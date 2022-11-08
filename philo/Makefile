@@ -6,7 +6,7 @@
 #    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:01:24 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/08 20:17:12 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/08 20:24:14 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,14 +28,14 @@ all: directories $(NAME)
 
 # Make the target executable
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $^
 
 # Make required directories
 directories: $(OBJ_DIR)
 
 # Make object files
 $(addprefix $(OBJ_DIR), %.o): $(addprefix $(SRC_DIR), %.c) | $(OBJ_DIR)
-	$(CC) -c $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 # Make object directory
 $(OBJ_DIR):
