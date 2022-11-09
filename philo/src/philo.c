@@ -6,13 +6,35 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/08 19:50:38 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:10:00 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <stdio.h>
 
+/*
+//Function represents a philosopher thread.
+void	*philosopher(void *arg)
+{
+	t_philo	philo;
+
+	philo = (t_philo *) arg;
+	if (two forks available)
+	{
+		make forks unavailable; lock mutex;
+		start eating;
+		make forks available; unlock mutex;
+		start sleeping;
+		start thinking; (waiting for forks);
+	}
+	else
+	{
+		start thinking;
+		(wait until forks available);
+	}
+}
+*/
 //Program runs the philosopher exercise.
 int	main(int argc, char **argv)
 {
