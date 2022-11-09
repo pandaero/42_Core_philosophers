@@ -6,23 +6,13 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 20:36:30 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 00:45:34 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
-#include <sys/time.h>
 #include <pthread.h>
 #include <unistd.h>
-#include <stdio.h>
-
-//Function works out the timestamp.
-void	workoutts(t_data *data)
-{
-	data->tmst->sec = data->tmst->t.tv_sec - data->tmst->rt.tv_sec;
-	data->tmst->msec = data->tmst->t.tv_usec - data->tmst->rt.tv_usec;
-	data->tmst->absms = data->tmst->sec * 1000 + (long) data->tmst->msec / 1000;
-}
 
 //Function represents a philosopher thread.
 void	*philosopher(void *arg)
@@ -40,22 +30,15 @@ void	*philosopher(void *arg)
 		i++;
 	}
 	pthread_mutex_lock(&philo->prev_f->mfork);
-	gettimeofday(&data->tmst->t, 0);
-	workoutts(data);
-	printf("%08ld %2d has taken a fork\n", data->tmst->absms, philo->num);
+	printevent(data, philo, 'f');
 	pthread_mutex_lock(&philo->next_f->mfork);
-	gettimeofday(&data->tmst->t, 0);
-	workoutts(data);
-	printf("%08ld %2d has taken a fork\n", data->tmst->absms, philo->num);
-	gettimeofday(&data->tmst->t, 0);
-	workoutts(data);
-	printf("%08ld %2d is eating\n", data->tmst->absms, philo->num);
+	printevent(data, philo, 'f');
+	printevent(data, philo, 'e');
 	usleep(1000 * data->rules->timeeat);
+	philo->eatct++;
 	pthread_mutex_unlock(&philo->prev_f->mfork);
 	pthread_mutex_unlock(&philo->prev_f->mfork);
-	gettimeofday(&data->tmst->t, 0);
-	workoutts(data);
-	printf("%08ld %2d is sleeping\n", data->tmst->absms, philo->num);
+	printevent(data, philo, 's');
 	usleep(1000 * data->rules->timeslp);
 	return (0);
 }
@@ -64,6 +47,7 @@ void	*philosopher(void *arg)
 //Function initialises a data type.
 t_data	*initdata(t_data *data, t_table *table, t_set *rules)
 {
+	data = (t_data *)malloc(sizeof(t_data));
 	data->philonum = 0;
 	data->rules = rules;
 	data->table = table;

@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 20:21:50 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 00:52:02 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,23 @@ int		ft_atoi(char *str);
 //Function returns a long int with the value contained in the given char string.
 long	ft_atol(char *str);
 
-// SETTING CREATION
+// LOGGING
+//Function works out the timestamp.
+void	workoutts(t_data *data);
+//Function prints out an event.
+void	printevent(t_data *data, t_philo *philo, char ch);
+
+// INITIALISATION
 //Function creates and initialises a fork.
 t_fork	*initfork(t_fork *fork);
 //Function creates and initialises a philosopher.
 t_philo	*initphilo(t_philo *philo);
 //Function creates and initialises a table.
 t_table	*inittable(t_table *table);
+//Function initialises a data type.
+t_data	*initdata(t_data *data, t_table *table, t_set *rules);
+
+// SETTING CREATION
 //Function adds a philosopher (and his corresponding fork) to the table.
 void	addphilo(t_table *table);
 #endif
