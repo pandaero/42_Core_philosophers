@@ -6,7 +6,7 @@
 #    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:01:24 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/08 20:24:14 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/09 20:36:57 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC := cc
 CFLAGS := -Wall -Werror -Wextra
 # Sources to compile
 SRC_DIR := src/
-SRC_FILES := philo.c utils.c
+SRC_FILES := philo.c utils.c create.c end.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 # Objects to compile
 OBJ_DIR := obj/
