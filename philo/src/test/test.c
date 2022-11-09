@@ -24,6 +24,7 @@ void	table_display_full(t_table *table)
 			break ;
 		printf("%3d   %5d %p %p | %p %p\n", node->num, node->eatct, \
 				node->prev_f, node->next_f, node->prev_ph, node->next_ph);
+		node = node->next_ph;
 	}
 	printf("%3d   %5d %p %p | %p %p\n", node->num, node->eatct, node->prev_f, \
 				node->next_f, node->prev_ph, node->next_ph);
