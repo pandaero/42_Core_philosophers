@@ -10,7 +10,7 @@ int	main(void)
 	table = 0;
 	table = inittable(table);
 	i = 0;
-	while (i < 1)
+	while (i < 4)
 	{
 		addphilo(table);
 		i++;
