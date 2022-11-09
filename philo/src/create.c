@@ -6,47 +6,12 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:47:04 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 19:31:13 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 00:48:02 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <stdlib.h>
-#include <pthread.h>
-
-//Function creates and initialises a fork as a mutex.
-t_fork	*initfork(t_fork *fork)
-{
-	fork = (t_fork *)malloc(sizeof(t_fork));
-	pthread_mutex_init(&fork->mfork, 0);
-	return (fork);
-}
-
-//Function creates and initialises a philosopher.
-t_philo	*initphilo(t_philo *philo)
-{
-	philo = (t_philo *)malloc(sizeof(t_philo));
-	philo->num = 0;
-	philo->eatct = 0;
-	philo->prev_ph = 0;
-	philo->next_ph = 0;
-	philo->prev_f = 0;
-	philo->next_f = 0;
-	return (philo);
-}
-
-//Function creates and initialises a table.
-t_table	*inittable(t_table *table)
-{
-	table = (t_table *)malloc(sizeof(t_table));
-	table->members = 0;
-	table->forks = 0;
-	table->first_ph = 0;
-	table->last_ph = 0;
-	table->first_f = 0;
-	table->last_f = 0;
-	return (table);
-}
 
 //Function assigns values for when a new philosopher joins.
 static void	newphiloassign(t_table *table, t_philo *new_ph, t_fork *new_f)
