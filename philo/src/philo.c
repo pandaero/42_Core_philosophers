@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 13:10:00 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:12:28 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char **argv)
 		printf("Time to eat : %6d\n", table.timeeat);
 		printf("Sleep time  : %6d\n", table.timeslp);
 		printf("Times to eat: %6d\n", table.reqeat);
+		return (0);
 	}
-	return (0);
+	return (-1);
 }
