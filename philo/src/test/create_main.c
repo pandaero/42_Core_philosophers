@@ -17,4 +17,5 @@ int	main(void)
 	}
 	table_display_full(table);
 	freetable(table);
+	return (0);
 }

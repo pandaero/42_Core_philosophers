@@ -6,18 +6,19 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:47:04 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 12:32:39 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:50:01 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <stdlib.h>
+#include <pthread.h>
 
-//Function creates and initialises a fork.
+//Function creates and initialises a fork as a mutex.
 t_fork	*initfork(t_fork *fork)
 {
 	fork = (t_fork *)malloc(sizeof(t_fork));
-	fork->available = 1;
+	pthread_mutex_init(&fork->mfork, 0);
 	return (fork);
 }
 

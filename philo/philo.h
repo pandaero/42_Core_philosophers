@@ -6,18 +6,19 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 13:04:56 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 18:49:43 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
+# include <pthread.h>
 
 //Typedef describes a fork on the philosopher table.
 typedef struct s_fork
 {
-	int	available;
-}		t_fork;
+	pthread_mutex_t mfork;
+}					t_fork;
 
 //Typedef describes a philosopher as a node in a circular doubly-linked list.
 typedef struct s_philo
