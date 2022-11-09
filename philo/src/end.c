@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:50:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 18:48:08 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:02:36 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 
-//Function frees the memory used by fork and its mutex.
+//Function frees the memory used by a fork and its mutex.
 void	freefork(t_fork *fork)
 {
 	pthread_mutex_destroy(&fork->mfork);
@@ -41,4 +41,11 @@ void	freetable(t_table *table)
 	freefork(cur_f);
 	free(cur_ph);
 	free(table);
+}
+
+//Function frees memory used by a data type.
+void	freedata(t_data *data)
+{
+	free(data->tmst);
+	free(data);
 }
