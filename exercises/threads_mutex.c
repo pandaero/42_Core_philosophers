@@ -17,7 +17,7 @@ void	*routine(void *arg)
 	}
 }
 
-int	main(int argc, char* argv)
+int	main(void)
 {
 	pthread_t		p1, p2, p3, p4;
 	pthread_mutex_t	mutex;
@@ -41,5 +41,5 @@ int	main(int argc, char* argv)
 		return (8);
 	pthread_mutex_destroy(&mutex);
 	printf("Number of mails: %d\n", mails);
-	return 0;
+	return (0);
 }
