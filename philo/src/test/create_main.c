@@ -1,7 +1,7 @@
 // Tests for the functions in create.c
 #include "test.h"
 
-//Test for addphilo. cc -Wall -Werror -Wextra create_main.c ../create.c ../end.c test.c
+/*Test for addphilo. cc -Wall -Werror -Wextra create_main.c ../create.c ../end.c test.c
 int	main(void)
 {
 	t_table	*table;
@@ -19,3 +19,4 @@ int	main(void)
 	freetable(table);
 	return (0);
 }
+//*/
