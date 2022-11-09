@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:47:04 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 19:30:20 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 19:31:13 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_fork	*initfork(t_fork *fork)
 t_philo	*initphilo(t_philo *philo)
 {
 	philo = (t_philo *)malloc(sizeof(t_philo));
-	philo->num = 1;
+	philo->num = 0;
 	philo->eatct = 0;
 	philo->prev_ph = 0;
 	philo->next_ph = 0;
@@ -81,7 +81,7 @@ void	addphilo(t_table *table)
 	new_f = initfork(new_f);
 	if (table->members == 0)
 	{
-		new_ph->num = 0;
+		new_ph->num = 1;
 		new_ph->next_f = new_f;
 		table->first_ph = new_ph;
 		table->last_ph = new_ph;
