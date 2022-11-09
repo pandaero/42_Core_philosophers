@@ -6,13 +6,14 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 18:49:43 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/09 20:21:50 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 # include <pthread.h>
+# include <sys/time.h>
 
 //Typedef describes a fork on the philosopher table.
 typedef struct s_fork
@@ -42,6 +43,16 @@ typedef struct s_table
 	t_fork	*last_f;
 }			t_table;
 
+//Typedef stores data required to print out a timestamp.
+typedef struct s_timestamp
+{
+	struct timeval	rt;
+	struct timeval	t;
+	long			sec;
+	int				msec;
+	long			absms;
+} 					t_timestamp;
+
 //Typedef stores conditions/settings for the philosopher exercise.
 typedef struct s_set
 {
@@ -52,9 +63,22 @@ typedef struct s_set
 	int	reqeat;
 }		t_set;
 
+//Typedef stores data required by a philosopher thread to work.
+typedef struct s_data
+{
+	int			philonum;
+	t_set		*rules;
+	t_table		*table;
+	t_timestamp	*tmst;
+}				t_data;
+
 // MEMORY HANDLING
+//Function frees the memory used by a fork and its mutex.
+void	freefork(t_fork *fork);
 //Function frees the memory used up in the table.
 void	freetable(t_table *table);
+//Function frees memory used by a data type.
+void	freedata(t_data *data);
 
 // INPUT HANDLING
 //Function checks whether a character is a numeric digit.
