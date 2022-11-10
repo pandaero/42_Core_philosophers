@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:42:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 00:16:50 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:03:20 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	workoutts(t_data *data)
 	data->tmst->sec = data->tmst->t.tv_sec - data->tmst->rt.tv_sec;
 	data->tmst->msec = data->tmst->t.tv_usec - data->tmst->rt.tv_usec;
 	data->tmst->absms = data->tmst->sec * 1000 + (long) data->tmst->msec / 1000;
+	if (data->tmst->absms < 0)
+		data->tmst->absms = 0;
 }
 
 //Function prints out an event.
