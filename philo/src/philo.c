@@ -6,29 +6,25 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 00:45:34 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:39:22 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <pthread.h>
 #include <unistd.h>
+#include <stdlib.h>
 
 //Function represents a philosopher thread.
 void	*philosopher(void *arg)
 {
 	t_data	*data;
 	t_philo	*philo;
-	int		i;
 
 	data = (t_data *) arg;
-	philo = data->table->first_ph;
-	i = 0;
-	while (i < data->philonum && data->philonum > 1)
-	{
-		philo = philo->next_ph;
-		i++;
-	}
+	philo = findphilo(data);
+	if (philo->num % 2 == 0)
+		usleep(500);
 	pthread_mutex_lock(&philo->prev_f->mfork);
 	printevent(data, philo, 'f');
 	pthread_mutex_lock(&philo->next_f->mfork);
@@ -41,18 +37,6 @@ void	*philosopher(void *arg)
 	printevent(data, philo, 's');
 	usleep(1000 * data->rules->timeslp);
 	return (0);
-}
-
-#include <stdlib.h>
-//Function initialises a data type.
-t_data	*initdata(t_data *data, t_table *table, t_set *rules)
-{
-	data = (t_data *)malloc(sizeof(t_data));
-	data->philonum = 0;
-	data->rules = rules;
-	data->table = table;
-	data->tmst = (t_timestamp *)malloc(sizeof(t_timestamp));
-	return (data);
 }
 
 //Function initialises the table and philosopher threads.
@@ -76,18 +60,22 @@ int	philosophers(t_set *rules)
 		i++;
 	}
 	gettimeofday(&data->tmst->rt, 0);
-	i = 0;
-	while (i < rules->numphi)
+	while (data->starve == 0)
 	{
-		data->philonum = i + 1;
-		if (pthread_create(&threads[i], 0, philosopher, data) != 0)
-			return(-1);
-		i++;
-	}
-	while (i < rules->numphi)
-	{
-		pthread_join(threads[i], 0);
-		i++;
+		i = 0;
+		while (i < rules->numphi)
+		{
+			data->philonum = i + 1;
+			if (pthread_create(&threads[i], 0, philosopher, data) != 0)
+				return(-1);
+			i++;
+		}
+		while (i < rules->numphi)
+		{
+			if (pthread_join(threads[i], 0) != 0)
+				perror("Joining error");
+			i++;
+		}
 	}
 	freedata(data);
 	freetable(table);
