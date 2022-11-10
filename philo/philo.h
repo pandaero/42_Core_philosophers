@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 00:52:02 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:15:26 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ long	ft_atol(char *str);
 void	workoutts(t_data *data);
 //Function prints out an event.
 void	printevent(t_data *data, t_philo *philo, char ch);
+
+// SEARCHING
+//Function finds a philosopher based on the assigned number.
+t_philo	*findphilo(t_data *data);
 
 // INITIALISATION
 //Function creates and initialises a fork.
