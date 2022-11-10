@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 01:40:21 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:45:03 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	*philosopher(void *arg)
 	pthread_mutex_unlock(&philo->prev_f->mfork);
 	printevent(data, philo, 's');
 	usleep(1000 * data->rules->timeslp);
+	printevent(data, philo, 't');
 	return (0);
 }
 
