@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 01:39:22 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:40:21 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,13 @@ int	philosophers(t_set *rules)
 		{
 			data->philonum = i + 1;
 			if (pthread_create(&threads[i], 0, philosopher, data) != 0)
-				return(-1);
+				return (-1);
 			i++;
 		}
 		while (i < rules->numphi)
 		{
 			if (pthread_join(threads[i], 0) != 0)
-				perror("Joining error");
+				return (-1);
 			i++;
 		}
 	}
