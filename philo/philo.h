@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 01:15:26 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 01:24:25 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_set
 typedef struct s_data
 {
 	int			philonum;
+	int			starve;
 	t_set		*rules;
 	t_table		*table;
 	t_timestamp	*tmst;
