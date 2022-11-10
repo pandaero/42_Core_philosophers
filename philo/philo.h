@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 01:24:25 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 08:19:50 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_philo
 {
 	int				num;
 	int				eatct;
+	int				starved;
 	struct s_philo	*prev_ph;
 	struct s_philo	*next_ph;
 	t_fork			*prev_f;

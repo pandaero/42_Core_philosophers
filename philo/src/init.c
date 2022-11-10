@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 00:47:31 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 01:24:55 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/10 08:20:16 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_philo	*initphilo(t_philo *philo)
 	philo = (t_philo *)malloc(sizeof(t_philo));
 	philo->num = 0;
 	philo->eatct = 0;
+	philo->starved = 0;
 	philo->prev_ph = 0;
 	philo->next_ph = 0;
 	philo->prev_f = 0;
