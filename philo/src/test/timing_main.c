@@ -15,7 +15,6 @@ int	main(void)
 	gettimeofday(&data->tmst->rt, 0);
 	sleep(2);
 	usleep(150000);
-	gettimeofday(&data->tmst->t, 0);
 	workoutts(data);
 	printf("Timestamp: %08ld\n", data->tmst->absms);
 	free(data->tmst);

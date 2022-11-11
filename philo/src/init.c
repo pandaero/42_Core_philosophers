@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 00:47:31 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 08:20:16 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:54:37 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_data	*initdata(t_data *data, t_table *table, t_set *rules)
 {
 	data = (t_data *)malloc(sizeof(t_data));
 	data->philonum = 0;
-	data->starve = 0;
+	data->starved = 0;
 	data->rules = rules;
 	data->table = table;
 	data->tmst = (t_timestamp *)malloc(sizeof(t_timestamp));
@@ -38,9 +38,13 @@ t_data	*initdata(t_data *data, t_table *table, t_set *rules)
 t_philo	*initphilo(t_philo *philo)
 {
 	philo = (t_philo *)malloc(sizeof(t_philo));
+	philo->state = (t_assess *)malloc(sizeof(t_assess));
+	philo->precheck = (t_assess *)malloc(sizeof(t_assess));
+	philo->postcheck = (t_assess *)malloc(sizeof(t_assess));
 	philo->num = 0;
 	philo->eatct = 0;
-	philo->starved = 0;
+	philo->mealtime = 0;
+	philo->philotod = 0;
 	philo->prev_ph = 0;
 	philo->next_ph = 0;
 	philo->prev_f = 0;

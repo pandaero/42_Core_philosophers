@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:50:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/09 20:02:36 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/11 23:56:38 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	freetable(t_table *table)
 {
 	t_philo	*cur_ph;
 	t_fork	*cur_f;
-	void	*temp;
+	t_philo	*temp;
 
 	cur_ph = table->first_ph;
 	while (cur_ph != table->last_ph)
@@ -35,6 +35,9 @@ void	freetable(t_table *table)
 		freefork(cur_f);
 		temp = cur_ph;
 		cur_ph = cur_ph->next_ph;
+		free(temp->state);
+		free(temp->precheck);
+		free(temp->postcheck);
 		free(temp);
 	}
 	cur_f = cur_ph->next_f;
