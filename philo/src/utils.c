@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:14:34 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/08 20:10:51 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:11:51 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	ft_isdigit(int ch)
 }
 
 //Function checks whether a string contains an integer-valid number.
-int	isinteger(char *str)
+int	isposinteger(char *str)
 {
 	long	num;
 
 	num = ft_atol(str);
-	if (num > INT_MAX || num < INT_MIN)
+	if (num > INT_MAX || num < 1)
 		return (0);
 	return (1);
 }
