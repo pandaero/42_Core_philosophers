@@ -6,12 +6,13 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 01:08:45 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/11 23:55:52 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 11:27:56 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <unistd.h>
+#include <limits.h>
 
 //Function finds a philosopher based on the assigned number.
 t_philo	*findphilonum(t_data *data)
@@ -22,4 +23,24 @@ t_philo	*findphilonum(t_data *data)
 	while (philo->num != data->philonum)
 		philo = philo->next_ph;
 	return (philo);
+}
+
+//Function finds the philosopher with the lowest eat count and returns it.
+int	findmineat(t_data *data)
+{
+	t_philo	*philo;
+	int		eatmin;
+	int		i;
+
+	philo = data->table->first_ph;
+	eatmin = INT_MAX;
+	i = 1;
+	while (i <= data->table->members)
+	{
+		if (philo->eatct < eatmin)
+			eatmin = philo->eatct;
+		philo = philo->next_ph;
+		i++;
+	}
+	return (eatmin);
 }
