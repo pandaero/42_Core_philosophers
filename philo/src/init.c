@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 00:47:31 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/11 23:54:37 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 01:38:43 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 t_fork	*initfork(t_fork *fork)
 {
 	fork = (t_fork *)malloc(sizeof(t_fork));
+	fork->available = 1;
 	pthread_mutex_init(&fork->mfork, 0);
 	return (fork);
 }
@@ -28,6 +29,7 @@ t_data	*initdata(t_data *data, t_table *table, t_set *rules)
 	data = (t_data *)malloc(sizeof(t_data));
 	data->philonum = 0;
 	data->starved = 0;
+	data->eaten = 0;
 	data->rules = rules;
 	data->table = table;
 	data->tmst = (t_timestamp *)malloc(sizeof(t_timestamp));
