@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/10 08:19:50 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 01:45:59 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,29 @@
 typedef struct s_fork
 {
 	pthread_mutex_t mfork;
+	int				available;
 }					t_fork;
+
+//Typedef is for the data that must be checked to print events.
+typedef struct s_assess
+{
+	int	forks;
+	int	meals;
+	int	dreams;
+	int thinks;
+	int	starved;
+}		t_assess;
 
 //Typedef describes a philosopher as a node in a circular doubly-linked list.
 typedef struct s_philo
 {
 	int				num;
 	int				eatct;
-	int				starved;
+	long			mealtime;
+	long			philotod;
+	t_assess		*state;
+	t_assess		*precheck;
+	t_assess		*postcheck;
 	struct s_philo	*prev_ph;
 	struct s_philo	*next_ph;
 	t_fork			*prev_f;
@@ -68,7 +83,8 @@ typedef struct s_set
 typedef struct s_data
 {
 	int			philonum;
-	int			starve;
+	int			starved;
+	int			eaten;
 	t_set		*rules;
 	t_table		*table;
 	t_timestamp	*tmst;
@@ -95,14 +111,18 @@ int		ft_atoi(char *str);
 long	ft_atol(char *str);
 
 // LOGGING
-//Function works out the timestamp.
+//Function increments feeding counters and prints all-fed condition.
+void	feeding(t_data *data, t_philo *philo);
+//Function works out the standard timestamp.
 void	workoutts(t_data *data);
 //Function prints out an event.
 void	printevent(t_data *data, t_philo *philo, char ch);
 
 // SEARCHING
 //Function finds a philosopher based on the assigned number.
-t_philo	*findphilo(t_data *data);
+t_philo	*findphilonum(t_data *data);
+//Function finds a (the first) starved philosopher.
+t_philo	*findphilostarve(t_data *data);
 
 // INITIALISATION
 //Function creates and initialises a fork.
