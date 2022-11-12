@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/11 23:58:18 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 01:47:20 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-//Function checks for a philosopher's starvation.
-void	starvationcheck(t_data *data, t_philo *philo)
-{
-	if ((data->tmst->absms - philo->mealtime) >= data->rules->timedie)
-		workouttsstarve(data, philo);
-}
-
+#include <stdio.h>
 //Function represents a thread that checks for philosophers starving.
 static void	*medical_examiner(void *arg)
 {
@@ -37,64 +31,10 @@ static void	*medical_examiner(void *arg)
 		workoutts(data);
 		if (data->tmst->absms - philo->mealtime >= data->rules->timedie)
 		{	
+			printevent(data, philo, 'd');
 			philo->state->starved = 1;
 			data->starved = 1;
-		}	
-		philo = philo->next_ph;
-		i++;
-	}
-	return (0);
-}
-
-//Function represents a thread that reports the events at the philosopher table.
-static void	*observer(void *arg)
-{
-	t_data		*data;
-	t_philo		*philo;
-	int		i;
-
-	data = (t_data *) arg;
-	philo = data->table->first_ph;
-	i = 1;
-	while (i > 0 && i <= data->table->members)
-	{
-		if (i > data->table->members)
-			break ;
-		philo->precheck->forks = philo->state->forks;
-		philo->precheck->meals = philo->state->meals;
-		philo->precheck->dreams = philo->state->dreams;
-		philo->precheck->thinks = philo->state->thinks;
-		philo->precheck->starved = philo->state->starved;
-		philo = philo->next_ph;
-		i++;
-	}
-	usleep(500 + 1000 * (data->rules->timeeat + data->rules->timeslp));
-	i = 1;
-	while (i > 0 && i <= data->table->members)
-	{
-		philo->postcheck->forks = philo->state->forks;
-		philo->postcheck->meals = philo->state->meals;
-		philo->postcheck->dreams = philo->state->dreams;
-		philo->postcheck->thinks = philo->state->thinks;
-		philo->postcheck->starved = philo->state->starved;
-		philo = philo->next_ph;
-		i++;
-	}
-	i = 1;
-	while (i > 0 && i <= data->table->members)
-	{
-		if (philo->postcheck->forks > philo->precheck->forks)
-			printevent(data, philo, 'f');
-		if (philo->postcheck->forks > philo->precheck->forks + 1)
-			printevent(data, philo, 'f');
-		if (philo->postcheck->meals > philo->precheck->meals)
-			printevent(data, philo, 'e');
-		if (philo->postcheck->dreams > philo->precheck->dreams)
-			printevent(data, philo, 's');
-		if (philo->postcheck->thinks > philo->precheck->thinks)
-			printevent(data, philo, 't');
-		if (philo->postcheck->starved == 1 || philo->precheck->starved == 1)
-			printevent(data, philo, 'd');
+		}
 		philo = philo->next_ph;
 		i++;
 	}
@@ -110,22 +50,26 @@ static void	*philosopher(void *arg)
 	data = (t_data *) arg;
 	philo = findphilonum(data);
 	usleep(100);
+	if (philo->eatct >= data->rules->reqeat && data->rules->reqeat > 0)
+		return (0);
 	if (philo->num % 2 == 0)
 		usleep(250);
-	//if (philo->prev_f->available == 1 && philo->next_f->available == 1)
-	//{
-		pthread_mutex_lock(&philo->prev_f->mfork);
-		philo->state->forks++;
-		pthread_mutex_lock(&philo->next_f->mfork);
-		philo->state->forks++;
-	//}
-	philo->state->meals++;
+	if (philo->next_f->available == 0 || philo->prev_f->available == 0)
+		return (0);
+	pthread_mutex_lock(&philo->prev_f->mfork);
+	printevent(data, philo, 'p');
+	pthread_mutex_lock(&philo->next_f->mfork);
+	printevent(data, philo, 'f');
+	printevent(data, philo, 'e');
 	usleep(1000 * data->rules->timeeat);
+	feeding(data, philo);
 	pthread_mutex_unlock(&philo->prev_f->mfork);
+	philo->prev_f->available = 1;
 	pthread_mutex_unlock(&philo->next_f->mfork);
-	philo->state->dreams++;
+	philo->next_f->available = 1;
+	printevent(data, philo, 's');
 	usleep(1000 * data->rules->timeslp);
-	philo->state->thinks++;
+	printevent(data, philo, 't');
 	return (0);
 }
 
@@ -140,7 +84,7 @@ int	philosophers(t_set *rules)
 	threads = 0;
 	table = 0;
 	data = 0;
-	threads = (pthread_t *)malloc((rules->numphi + 2) * sizeof(pthread_t));
+	threads = (pthread_t *)malloc((rules->numphi + 1) * sizeof(pthread_t));
 	table = inittable(table);
 	data = initdata(data, table, rules);
 	i = 0;
@@ -150,11 +94,9 @@ int	philosophers(t_set *rules)
 		i++;
 	}
 	gettimeofday(&data->tmst->rt, 0);
-	while (data->starved == 0)
+	while (data->starved == 0 && data->eaten != table->members)
 	{
 		if (pthread_create(&threads[0], 0, medical_examiner, data) != 0)
-			return (-1);
-		if (pthread_create(&threads[rules->numphi + 1], 0, observer, data) != 0)
 			return (-1);
 		i = 1;
 		while (i <= rules->numphi)
@@ -171,8 +113,6 @@ int	philosophers(t_set *rules)
 			i++;
 		}
 		if (pthread_join(threads[0], 0) != 0)
-			return (-1);
-		if (pthread_join(threads[rules->numphi + 1], 0) != 0)
 			return (-1);
 	}
 	freedata(data);
