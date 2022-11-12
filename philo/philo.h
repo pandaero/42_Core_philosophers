@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 01:45:59 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:18:45 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ typedef struct s_philo
 	long			mealtime;
 	long			philotod;
 	t_assess		*state;
-	t_assess		*precheck;
-	t_assess		*postcheck;
 	struct s_philo	*prev_ph;
 	struct s_philo	*next_ph;
 	t_fork			*prev_f;
@@ -102,13 +100,25 @@ void	freedata(t_data *data);
 //Function checks whether a character is a numeric digit.
 int		ft_isdigit(int ch);
 //Function checks whether a string contains an integer-valid number.
-int		isinteger(char *str);
+int		isposinteger(char *str);
 //Function checks whether a string contains a valid signed numeric declaration.
 int		isvalidnum(char *str);
 //Function returns an integer with the value contained in the given char string.
 int		ft_atoi(char *str);
 //Function returns a long int with the value contained in the given char string.
 long	ft_atol(char *str);
+
+// MAIN
+//Function represents a thread that checks for philosophers starving.
+void	*medical_examiner(void *arg);
+//Function represents a philosopher thread.
+void	*philosopher(void *arg);
+
+// ASSISTING
+//Function performs actions at the beginning of each philosopher thread.
+int	beginning(t_data *data, t_philo *philo);
+//Function starts and joins the observer and philosopher threads.
+int	threading(t_data *data, pthread_t *threads, int i);
 
 // LOGGING
 //Function increments feeding counters and prints all-fed condition.
@@ -121,8 +131,8 @@ void	printevent(t_data *data, t_philo *philo, char ch);
 // SEARCHING
 //Function finds a philosopher based on the assigned number.
 t_philo	*findphilonum(t_data *data);
-//Function finds a (the first) starved philosopher.
-t_philo	*findphilostarve(t_data *data);
+//Function finds the philosopher with the lowest eat count and returns it.
+int		findmineat(t_data *data);
 
 // INITIALISATION
 //Function creates and initialises a fork.

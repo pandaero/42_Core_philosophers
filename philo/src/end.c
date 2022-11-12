@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:50:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/11 23:56:38 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:17:56 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ void	freetable(t_table *table)
 		temp = cur_ph;
 		cur_ph = cur_ph->next_ph;
 		free(temp->state);
-		free(temp->precheck);
-		free(temp->postcheck);
 		free(temp);
 	}
 	cur_f = cur_ph->next_f;
@@ -50,5 +48,6 @@ void	freetable(t_table *table)
 void	freedata(t_data *data)
 {
 	free(data->tmst);
+	free(data->rules);
 	free(data);
 }
