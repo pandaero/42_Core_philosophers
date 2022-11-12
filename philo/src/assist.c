@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 20:03:09 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:09:16 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	*medical_examiner(void *arg)
 		workoutts(data);
 		if (data->tmst->absms - philo->mealtime >= data->rules->timedie)
 		{
-			if (data->starved == 1)
-				printevent(data, philo, 'd');
 			philo->state->starved = 1;
 			data->starved += 1;
+			if (data->starved == 1)
+				printevent(data, philo, 'd');
 		}
 		philo = philo->next_ph;
 		i++;
