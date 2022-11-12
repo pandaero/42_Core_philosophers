@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:42:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 01:46:18 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 14:38:06 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	workoutts(t_data *data)
 void	feeding(t_data *data, t_philo *philo)
 {
 	philo->eatct++;
-	philo->mealtime = data->tmst->absms - philo->mealtime;
+	philo->mealtime = data->tmst->absms;
 	if (philo->eatct == data->rules->reqeat)
 	{
-		data->eaten += 1;
+		data->eaten++;
 		if (data->eaten == data->table->members)
 			printf("%08ld  All the philosohers are fed!\n", data->tmst->absms);
 	}
@@ -41,23 +41,26 @@ void	feeding(t_data *data, t_philo *philo)
 //Function prints out an event.
 void	printevent(t_data *data, t_philo *philo, char ch)
 {
+	if (ch == 'd')
+	{
+		printf("%ld %d died\n", data->tmst->absms, philo->num);
+		return ;
+	}
 	workoutts(data);
 	if (ch == 'p')
 	{
 		philo->prev_f->available = 0;
-		printf("%08ld %2d has taken a fork\n", data->tmst->absms, philo->num);
+		printf("%ld %d has taken a fork\n", data->tmst->absms, philo->num);
 	}
 	if (ch == 'f')
 	{
 		philo->next_f->available = 0;
-		printf("%08ld %2d has taken a fork\n", data->tmst->absms, philo->num);
+		printf("%ld %d has taken a fork\n", data->tmst->absms, philo->num);
 	}
 	if (ch == 'e')
-		printf("%08ld %2d is eating\n", data->tmst->absms, philo->num);
+		printf("%ld %d is eating\n", data->tmst->absms, philo->num);
 	if (ch == 's')
-		printf("%08ld %2d is sleeping\n", data->tmst->absms, philo->num);
+		printf("%ld %d is sleeping\n", data->tmst->absms, philo->num);
 	if	(ch == 't')
-		printf("%08ld %2d is thinking\n", data->tmst->absms, philo->num);
-	if (ch == 'd')
-		printf("%08ld %2d died\n", data->tmst->absms, philo->num);
+		printf("%ld %d is thinking\n", data->tmst->absms, philo->num);
 }
