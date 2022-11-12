@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:42:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/11 23:36:28 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 01:46:18 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,39 @@ void	workoutts(t_data *data)
 		data->tmst->absms = 0;
 }
 
-//Function works out the timestamp of a philosopher's last meal.
-void	workouttsmeal(t_data *data, t_philo *philo)
+//Function increments feeding counters and prints all-fed condition.
+void	feeding(t_data *data, t_philo *philo)
 {
-	workoutts(data);
+	philo->eatct++;
 	philo->mealtime = data->tmst->absms - philo->mealtime;
-}
-
-//Function works out the starvation timestamp.
-void	workouttsstarve(t_data *data, t_philo *philo)
-{
-	philo->philotod = data->tmst->absms;
+	if (philo->eatct == data->rules->reqeat)
+	{
+		data->eaten += 1;
+		if (data->eaten == data->table->members)
+			printf("%08ld  All the philosohers are fed!\n", data->tmst->absms);
+	}
 }
 
 //Function prints out an event.
 void	printevent(t_data *data, t_philo *philo, char ch)
 {
 	workoutts(data);
-	if (ch == 'f')
-		printf("%08ld %2d has taken a fork\n", data->tmst->absms, philo->num);
-	if (ch == 'e')
+	if (ch == 'p')
 	{
-		printf("%08ld %2d is eating\n", data->tmst->absms, philo->num);
-		workouttsmeal(data, philo);
+		philo->prev_f->available = 0;
+		printf("%08ld %2d has taken a fork\n", data->tmst->absms, philo->num);
 	}
+	if (ch == 'f')
+	{
+		philo->next_f->available = 0;
+		printf("%08ld %2d has taken a fork\n", data->tmst->absms, philo->num);
+	}
+	if (ch == 'e')
+		printf("%08ld %2d is eating\n", data->tmst->absms, philo->num);
 	if (ch == 's')
 		printf("%08ld %2d is sleeping\n", data->tmst->absms, philo->num);
 	if	(ch == 't')
 		printf("%08ld %2d is thinking\n", data->tmst->absms, philo->num);
 	if (ch == 'd')
-	{
-		workouttsstarve(data, philo);
-		printf("%08ld %2d died\n", philo->philotod, philo->num);
-	}
+		printf("%08ld %2d died\n", data->tmst->absms, philo->num);
 }
