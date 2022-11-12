@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:42:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 14:38:06 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:14:46 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,6 @@ void	printevent(t_data *data, t_philo *philo, char ch)
 		printf("%ld %d is eating\n", data->tmst->absms, philo->num);
 	if (ch == 's')
 		printf("%ld %d is sleeping\n", data->tmst->absms, philo->num);
-	if	(ch == 't')
+	if (ch == 't')
 		printf("%ld %d is thinking\n", data->tmst->absms, philo->num);
 }
