@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 20:08:00 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/12 20:14:03 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	philosophers(t_set *rules)
 	gettimeofday(&data->tmst->rt, 0);
 	if (threading(data, threads, i) == -1)
 		write(2, "Error.\n", 7);
+	free(threads);
 	freedata(data);
 	freetable(table);
 	return (0);
