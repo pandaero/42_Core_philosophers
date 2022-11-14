@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:50:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/14 20:10:36 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/14 20:24:00 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	freetable(t_table *table)
 		freefork(cur_f);
 		temp = cur_ph;
 		cur_ph = cur_ph->next_ph;
-		free(temp);
 		pthread_mutex_destroy(&temp->mforkpair);
+		free(temp);
 	}
 	cur_f = cur_ph->next_f;
 	freefork(cur_f);
-	pthread_mutex_destroy(&temp->mforkpair);
+	pthread_mutex_destroy(&cur_ph->mforkpair);
 	free(cur_ph);
 	free(table);
 }
