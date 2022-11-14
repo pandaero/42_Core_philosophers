@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:42:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/14 11:37:51 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:34:26 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,9 @@ void	printevent(t_data *data, t_philo *philo, char ch)
 	{
 		workoutts(data);
 		if (ch == 'p')
-		{
-			philo->prev_f->available = 0;
 			printf("%5ld %d has taken a fork\n", data->tmst->absms, philo->num);
-		}
 		if (ch == 'f')
-		{
-			philo->next_f->available = 0;
 			printf("%5ld %d has taken a fork\n", data->tmst->absms, philo->num);
-		}
 		if (ch == 'e')
 			printf("%5ld %d is eating\n", data->tmst->absms, philo->num);
 		if (ch == 's')
