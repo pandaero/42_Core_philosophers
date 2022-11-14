@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/14 20:20:50 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/14 21:23:29 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,10 @@ int		isvalidnum(char *str);
 int		ft_atoi(char *str);
 //Function returns a long int with the value contained in the given char string.
 long	ft_atol(char *str);
+
+// OTHER UTILS
+//Function returns a random 5-digit number based on the current time.
+int		randomnum(int max);
 
 // MAIN
 //Function represents a thread that checks for philosophers starving.
