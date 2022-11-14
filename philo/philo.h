@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/14 21:23:29 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:41:51 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_fork
 {
 	pthread_mutex_t mfork;
+	int				available;
 }					t_fork;
 
 //Typedef describes a philosopher as a node in a circular doubly-linked list.
@@ -26,7 +27,6 @@ typedef struct s_philo
 {
 	int				num;
 	int				eatct;
-	pthread_mutex_t	mforkpair;
 	long			mealtime;
 	long			philotod;
 	struct s_philo	*prev_ph;
