@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 00:47:31 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/14 11:20:36 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:42:13 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ t_data	*initdata(t_data *data, t_table *table, t_set *rules)
 t_philo	*initphilo(t_philo *philo)
 {
 	philo = (t_philo *)malloc(sizeof(t_philo));
-	philo->state = (t_assess *)malloc(sizeof(t_assess));
 	philo->num = 0;
 	philo->eatct = 0;
 	philo->mealtime = 0;
