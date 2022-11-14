@@ -6,7 +6,7 @@
 #    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:01:24 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/10 01:15:38 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/14 12:26:52 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS := -Wall -Werror -Wextra
 COPT := -g
 # Sources to compile
 SRC_DIR := src/
-SRC_FILES := philo.c utils.c create.c init.c end.c search.c timing.c
+SRC_FILES := philo.c utils.c create.c init.c end.c search.c timing.c assist.c
 SRCS = $(addprefix $(SRC_DIR), $(SRC_FILES))
 # Objects to compile
 OBJ_DIR := obj/
