@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 20:18:45 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:40:10 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,6 @@ typedef struct s_fork
 	int				available;
 }					t_fork;
 
-//Typedef is for the data that must be checked to print events.
-typedef struct s_assess
-{
-	int	forks;
-	int	meals;
-	int	dreams;
-	int thinks;
-	int	starved;
-}		t_assess;
-
 //Typedef describes a philosopher as a node in a circular doubly-linked list.
 typedef struct s_philo
 {
@@ -39,7 +29,6 @@ typedef struct s_philo
 	int				eatct;
 	long			mealtime;
 	long			philotod;
-	t_assess		*state;
 	struct s_philo	*prev_ph;
 	struct s_philo	*next_ph;
 	t_fork			*prev_f;
@@ -83,6 +72,7 @@ typedef struct s_data
 	int			philonum;
 	int			starved;
 	int			eaten;
+	int			actions;
 	t_set		*rules;
 	t_table		*table;
 	t_timestamp	*tmst;
