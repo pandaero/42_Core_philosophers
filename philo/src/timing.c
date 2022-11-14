@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:42:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 20:14:46 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:37:51 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	feeding(t_data *data, t_philo *philo)
 	{
 		data->eaten++;
 		if (data->eaten == data->table->members)
-			printf("%08ld  All the philosohers are fed!\n", data->tmst->absms);
+			printf("%5ld  All the philosophers are fed!\n", data->tmst->absms);
 	}
 }
 
@@ -43,24 +43,27 @@ void	printevent(t_data *data, t_philo *philo, char ch)
 {
 	if (ch == 'd')
 	{
-		printf("%ld %d died\n", data->tmst->absms, philo->num);
+		printf("%5ld %d died\n", data->tmst->absms, philo->num);
 		return ;
 	}
-	workoutts(data);
-	if (ch == 'p')
+	if (data->starved == 0)
 	{
-		philo->prev_f->available = 0;
-		printf("%ld %d has taken a fork\n", data->tmst->absms, philo->num);
+		workoutts(data);
+		if (ch == 'p')
+		{
+			philo->prev_f->available = 0;
+			printf("%5ld %d has taken a fork\n", data->tmst->absms, philo->num);
+		}
+		if (ch == 'f')
+		{
+			philo->next_f->available = 0;
+			printf("%5ld %d has taken a fork\n", data->tmst->absms, philo->num);
+		}
+		if (ch == 'e')
+			printf("%5ld %d is eating\n", data->tmst->absms, philo->num);
+		if (ch == 's')
+			printf("%5ld %d is sleeping\n", data->tmst->absms, philo->num);
+		if (ch == 't')
+			printf("%5ld %d is thinking\n", data->tmst->absms, philo->num);
 	}
-	if (ch == 'f')
-	{
-		philo->next_f->available = 0;
-		printf("%ld %d has taken a fork\n", data->tmst->absms, philo->num);
-	}
-	if (ch == 'e')
-		printf("%ld %d is eating\n", data->tmst->absms, philo->num);
-	if (ch == 's')
-		printf("%ld %d is sleeping\n", data->tmst->absms, philo->num);
-	if (ch == 't')
-		printf("%ld %d is thinking\n", data->tmst->absms, philo->num);
 }
