@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 00:47:31 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 20:17:49 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/14 11:20:36 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ t_data	*initdata(t_data *data, t_table *table, t_set *rules)
 	data->philonum = 0;
 	data->starved = 0;
 	data->eaten = 0;
+	data->actions = 0;
 	data->rules = rules;
 	data->table = table;
 	data->tmst = (t_timestamp *)malloc(sizeof(t_timestamp));
