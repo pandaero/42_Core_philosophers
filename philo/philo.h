@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/14 11:40:10 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/14 20:11:17 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_philo
 {
 	int				num;
 	int				eatct;
+	pthread_mutex_t	mforkpair;
 	long			mealtime;
 	long			philotod;
 	struct s_philo	*prev_ph;
