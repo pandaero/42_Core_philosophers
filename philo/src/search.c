@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 01:08:45 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/12 11:27:56 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/14 18:39:06 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	findmineat(t_data *data)
 	int		i;
 
 	philo = data->table->first_ph;
-	eatmin = INT_MAX;
+	eatmin = philo->eatct;
 	i = 1;
-	while (i <= data->table->members)
+	while (data->table->members > 1 && i <= data->table->members)
 	{
 		if (philo->eatct < eatmin)
 			eatmin = philo->eatct;
