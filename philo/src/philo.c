@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 00:44:10 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:08:36 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,5 @@ int	main(int argc, char **argv)
 	}
 	else
 		write(2, "Error.\n", 7);
-	free(rules);
 	return (-1);
 }
