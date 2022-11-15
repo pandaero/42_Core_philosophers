@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 00:52:32 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 00:57:19 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ int	threading(t_data *data, pthread_t *threads, int i)
 		data->philonum = i;
 		if (pthread_create(&threads[i], 0, philosopher, data) != 0)
 			return (-1);
+		usleep(100);
 		i++;
 	}
 	i = 1;
