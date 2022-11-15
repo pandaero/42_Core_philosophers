@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 01:04:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 02:38:47 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 02:50:15 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	lockassist(t_data *data, t_philo *philo)
 	feeding(data, philo);
 }
 
-#include <stdio.h>
 //Function handles locking forks.
 void	lockingforks(t_data *data, t_philo *philo)
 {
