@@ -6,14 +6,14 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 02:47:49 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 02:55:21 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <pthread.h>
 #include <unistd.h>
-#include <stdio.h>
+
 //Function represents a thread that checks for philosophers starving.
 void	*medical_examiner(void *arg)
 {
@@ -35,9 +35,7 @@ void	*medical_examiner(void *arg)
 				printevent(data, philo, 'd');
 				break ;
 			}
-			if (data->table->members == 1)
-				break ;
-			else
+			if (data->table->members > 1)
 				philo = philo->next_ph;
 			i++;
 		}
