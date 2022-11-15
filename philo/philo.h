@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 00:41:51 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:07:11 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,10 @@ void	*philosopher(void *arg);
 int	beginning(t_data *data, t_philo *philo);
 //Function starts and joins the observer and philosopher threads.
 int	threading(t_data *data, pthread_t *threads, int i);
+//Function handles locking forks.
+void	lockingforks(t_data *data, t_philo *philo);
+//Function handles unlocking forks.
+void	unlockingforks(t_data *data, t_philo *philo);
 
 // LOGGING
 //Function increments feeding counters and prints all-fed condition.

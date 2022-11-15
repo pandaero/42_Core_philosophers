@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 00:57:19 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:06:24 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#include <stdio.h>
 //Function represents a thread that checks for philosophers starving.
 void	*medical_examiner(void *arg)
 {
@@ -59,39 +58,6 @@ int	beginning(t_data *data, t_philo *philo)
 	if (data->starved > 0)
 		return (0);
 	return (1);
-}
-
-//Function handles locking and unlocking fork pairs.
-void	lockingforks(t_data *data, t_philo *philo)
-{
-	while (philo->prev_f->available == 0 && philo->next_f->available == 0)
-		usleep(100);
-	while (philo->prev_f->available == 1 || philo->next_f->available == 1)
-	{
-		pthread_mutex_lock(&philo->prev_f->mfork);
-		philo->prev_f->available = 0;
-		if (philo->next_f->available == 0)
-		{
-			pthread_mutex_unlock(&philo->prev_f->mfork);
-			philo->prev_f->available = 1;
-			continue ;
-		}
-		pthread_mutex_lock(&philo->next_f->mfork);
-		philo->next_f->available = 0;
-		printevent(data, philo, 'p');
-		printevent(data, philo, 'f');
-		printevent(data, philo, 'e');
-		feeding(data, philo);
-	}
-}
-
-void	unlockingforks(t_data *data, t_philo *philo)
-{
-		pthread_mutex_unlock(&philo->prev_f->mfork);
-		philo->prev_f->available = 1;			
-		pthread_mutex_unlock(&philo->next_f->mfork);
-		philo->next_f->available = 1;			
-		printevent(data, philo, 's');
 }
 
 //Function represents a philosopher thread.
