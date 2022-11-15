@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 01:42:44 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 09:16:48 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 //Typedef describes a fork on the philosopher table.
 typedef struct s_fork
 {
-	pthread_mutex_t mfork;
+	pthread_mutex_t	mfork;
 	int				available;
 }					t_fork;
 
@@ -54,7 +54,7 @@ typedef struct s_timestamp
 	long			sec;
 	int				msec;
 	long			absms;
-} 					t_timestamp;
+}					t_timestamp;
 
 //Typedef stores conditions/settings for the philosopher exercise.
 typedef struct s_set
