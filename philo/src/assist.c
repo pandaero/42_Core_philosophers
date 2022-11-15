@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 01:06:24 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:32:06 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ void	*medical_examiner(void *arg)
 				if (data->starved == 1)
 					printevent(data, philo, 'd');
 			}
-			philo = philo->next_ph;
+			if (data->table->members == 1)
+				break ;
+			else
+				philo = philo->next_ph;
 			i++;
 		}
 	}
@@ -47,8 +50,13 @@ void	*medical_examiner(void *arg)
 //Function performs actions at the beginning of each philosopher thread.
 int	beginning(t_data *data, t_philo *philo)
 {
-	if (data->table->forks == 1)
-		return (0);
+	if (data->table->members == 1)
+	{
+		while (data->starved == 0)
+			usleep(100);
+		data->actions++;
+		return (1);
+	}
 	if ((philo->eatct >= data->rules->reqeat && data->rules->reqeat > 0) || \
 			philo->eatct > findmineat(data) || \
 			data->eaten == data->table->members)
@@ -57,7 +65,7 @@ int	beginning(t_data *data, t_philo *philo)
 		usleep(200);
 	if (data->starved > 0)
 		return (0);
-	return (1);
+	return (2);
 }
 
 //Function represents a philosopher thread.
@@ -72,6 +80,8 @@ void	*philosopher(void *arg)
 	{
 		if (beginning(data, philo) == 0)
 			continue ;
+		if (beginning(data, philo) == 1)
+			return (0);
 		lockingforks(data, philo);
 		usleep(1000 * data->rules->timeeat);
 		unlockingforks(data, philo);

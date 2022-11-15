@@ -6,12 +6,13 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 01:04:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 01:09:14 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:23:40 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <pthread.h>
+#include <unistd.h>
 
 //Function handles locking forks.
 void	lockingforks(t_data *data, t_philo *philo)
