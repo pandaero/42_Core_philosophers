@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:42:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 00:34:26 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 02:48:33 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	feeding(t_data *data, t_philo *philo)
 	{
 		data->eaten++;
 		if (data->eaten == data->table->members)
-			printf("%5ld  All the philosophers are fed!\n", data->tmst->absms);
+			printf("%5ld All the philosophers are fed!\n", data->tmst->absms);
 	}
 }
 
@@ -46,7 +46,7 @@ void	printevent(t_data *data, t_philo *philo, char ch)
 		printf("%5ld %d died\n", data->tmst->absms, philo->num);
 		return ;
 	}
-	if (data->starved == 0)
+	if (data->starved == 0 && data->eaten < data->table->members)
 	{
 		workoutts(data);
 		if (ch == 'p')

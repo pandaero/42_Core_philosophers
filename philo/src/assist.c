@@ -6,26 +6,24 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 01:46:22 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 02:47:49 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <pthread.h>
 #include <unistd.h>
-
+#include <stdio.h>
 //Function represents a thread that checks for philosophers starving.
 void	*medical_examiner(void *arg)
 {
 	t_data	*data;
 	t_philo	*philo;
-	int		actionsstart;
 	int		i;
 
 	data = (t_data *) arg;
 	philo = data->table->first_ph;
-	actionsstart = data->actions;
-	while (data->actions <= actionsstart)
+	while (data->starved == 0 && data->eaten < data->table->members)
 	{
 		i = 1;
 		while (i > 0 && i <= data->table->members)
@@ -35,7 +33,6 @@ void	*medical_examiner(void *arg)
 			{
 				data->starved++;
 				printevent(data, philo, 'd');
-				data->actions++;
 				break ;
 			}
 			if (data->table->members == 1)
@@ -60,6 +57,8 @@ int	beginning(t_data *data, t_philo *philo)
 	}
 	if (data->starved > 0)
 		return (1);
+	if (philo->num % 2 == 1)
+		usleep(400);
 	if ((philo->eatct >= data->rules->reqeat && data->rules->reqeat > 0) || \
 			philo->eatct > findmineat(data) || \
 			data->eaten == data->table->members)
@@ -77,7 +76,7 @@ void	*philosopher(void *arg)
 
 	data = (t_data *) arg;
 	philo = findphilonum(data);
-	while (data->starved == 0)
+	while (data->starved == 0 && data->eaten < data->table->members)
 	{
 		if (beginning(data, philo) == 0)
 			continue ;
@@ -88,10 +87,7 @@ void	*philosopher(void *arg)
 		if (unlockingforks(data, philo) == 0)
 			return (0);
 		usleep(1000 * data->rules->timeslp);
-		if (data->starved > 0)
-			return (0);
 		printevent(data, philo, 't');
-		data->actions++;
 	}
 	return (0);
 }
