@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 01:32:06 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:46:22 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ void	*medical_examiner(void *arg)
 			workoutts(data);
 			if (data->tmst->absms - philo->mealtime >= data->rules->timedie)
 			{
-				data->starved += 1;
-				if (data->starved == 1)
-					printevent(data, philo, 'd');
+				data->starved++;
+				printevent(data, philo, 'd');
+				data->actions++;
+				break ;
 			}
 			if (data->table->members == 1)
 				break ;
@@ -57,14 +58,14 @@ int	beginning(t_data *data, t_philo *philo)
 		data->actions++;
 		return (1);
 	}
+	if (data->starved > 0)
+		return (1);
 	if ((philo->eatct >= data->rules->reqeat && data->rules->reqeat > 0) || \
 			philo->eatct > findmineat(data) || \
 			data->eaten == data->table->members)
 		return (0);
 	if (philo->num % 2 == 1)
 		usleep(200);
-	if (data->starved > 0)
-		return (0);
 	return (2);
 }
 
@@ -84,8 +85,11 @@ void	*philosopher(void *arg)
 			return (0);
 		lockingforks(data, philo);
 		usleep(1000 * data->rules->timeeat);
-		unlockingforks(data, philo);
+		if (unlockingforks(data, philo) == 0)
+			return (0);
 		usleep(1000 * data->rules->timeslp);
+		if (data->starved > 0)
+			return (0);
 		printevent(data, philo, 't');
 		data->actions++;
 	}

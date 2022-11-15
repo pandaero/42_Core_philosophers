@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 01:04:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 01:23:40 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/15 01:51:39 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	lockingforks(t_data *data, t_philo *philo)
 			philo->prev_f->available = 1;
 			continue ;
 		}
+		if (data->starved > 0)
+			return ;
 		pthread_mutex_lock(&philo->next_f->mfork);
 		philo->next_f->available = 0;
 		printevent(data, philo, 'p');
@@ -39,11 +41,14 @@ void	lockingforks(t_data *data, t_philo *philo)
 }
 
 //Function handles unlocking forks.
-void	unlockingforks(t_data *data, t_philo *philo)
+int	unlockingforks(t_data *data, t_philo *philo)
 {
+	if (data->starved > 0)
+		return (0);
 	pthread_mutex_unlock(&philo->prev_f->mfork);
 	philo->prev_f->available = 1;
 	pthread_mutex_unlock(&philo->next_f->mfork);
 	philo->next_f->available = 1;
 	printevent(data, philo, 's');
+	return (1);
 }
