@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 09:16:48 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:12:50 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 typedef struct s_fork
 {
 	pthread_mutex_t	mfork;
-	int				available;
 }					t_fork;
 
 //Typedef describes a philosopher as a node in a circular doubly-linked list.
@@ -99,7 +98,7 @@ int		ft_atoi(char *str);
 long	ft_atol(char *str);
 
 // OTHER UTILS
-//Function returns a random 5-digit number based on the current time.
+//Function returns a random (up to) 5-digit number based on the current time.
 int		randomnum(int max);
 
 // MAIN
@@ -116,7 +115,7 @@ int		threading(t_data *data, pthread_t *threads, int i);
 //Function handles locking forks.
 void	lockingforks(t_data *data, t_philo *philo);
 //Function handles unlocking forks.
-int		unlockingforks(t_data *data, t_philo *philo);
+void	unlockingforks(t_data *data, t_philo *philo);
 
 // LOGGING
 //Function increments feeding counters and prints all-fed condition.
