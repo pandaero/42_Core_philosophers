@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 22:25:48 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:28:15 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#include <stdio.h>
 void	unlockforks(t_data *data, t_philo *philo)
 {
 	if (data->table->members == 1)
