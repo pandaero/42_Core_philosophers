@@ -6,7 +6,7 @@
 #    By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/08 19:01:24 by pandalaf          #+#    #+#              #
-#    Updated: 2022/11/15 01:22:06 by pandalaf         ###   ########.fr        #
+#    Updated: 2022/11/17 21:18:54 by pandalaf         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME := philo
 # Compiler options
 CC := cc
 CFLAGS := -Wall -Werror -Wextra
-COPT := -g
+COPT := #-fsanitize=address
 # Sources to compile
 SRC_DIR := src/
 SRC_FILES := philo.c utils.c create.c init.c end.c search.c timing.c assist.c \
