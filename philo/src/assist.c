@@ -6,13 +6,33 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 02:55:21 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:25:48 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 #include <pthread.h>
 #include <unistd.h>
+
+#include <stdio.h>
+void	unlockforks(t_data *data, t_philo *philo)
+{
+	if (data->table->members == 1)
+	{
+		pthread_mutex_unlock(&philo->next_f->mfork);
+	}
+	if (data->table->members > 1)
+	{
+		pthread_mutex_unlock(&philo->prev_f->mfork);
+		pthread_mutex_unlock(&philo->prev_ph->prev_f->mfork);
+		pthread_mutex_unlock(&philo->prev_ph->next_f->mfork);
+	}
+	if (data->table->members > 2)
+	{
+		pthread_mutex_unlock(&philo->next_ph->prev_f->mfork);
+		pthread_mutex_unlock(&philo->next_ph->next_f->mfork);
+	}
+}
 
 //Function represents a thread that checks for philosophers starving.
 void	*medical_examiner(void *arg)
@@ -22,15 +42,16 @@ void	*medical_examiner(void *arg)
 	int		i;
 
 	data = (t_data *) arg;
-	philo = data->table->first_ph;
 	while (data->starved == 0 && data->eaten < data->table->members)
 	{
+		philo = data->table->first_ph;
 		i = 1;
-		while (i > 0 && i <= data->table->members)
+		while (i <= data->table->members)
 		{
 			workoutts(data);
 			if (data->tmst->absms - philo->mealtime >= data->rules->timedie)
 			{
+				unlockforks(data, philo);
 				data->starved++;
 				printevent(data, philo, 'd');
 				break ;
@@ -46,23 +67,10 @@ void	*medical_examiner(void *arg)
 //Function performs actions at the beginning of each philosopher thread.
 int	beginning(t_data *data, t_philo *philo)
 {
-	if (data->table->members == 1)
-	{
-		while (data->starved == 0)
-			usleep(100);
-		data->actions++;
-		return (1);
-	}
-	if (data->starved > 0)
-		return (1);
-	if (philo->num % 2 == 1)
-		usleep(400);
 	if ((philo->eatct >= data->rules->reqeat && data->rules->reqeat > 0) || \
 			philo->eatct > findmineat(data) || \
 			data->eaten == data->table->members)
 		return (0);
-	if (philo->num % 2 == 1)
-		usleep(200);
 	return (2);
 }
 
@@ -76,14 +84,16 @@ void	*philosopher(void *arg)
 	philo = findphilonum(data);
 	while (data->starved == 0 && data->eaten < data->table->members)
 	{
-		if (beginning(data, philo) == 0)
-			continue ;
-		if (beginning(data, philo) == 1)
-			return (0);
+		if (beginning(data, philo) != 2)
+		{
+			if (beginning(data, philo) == 0)
+				continue ;
+			if (beginning(data, philo) == 1)
+				return (0);
+		}
 		lockingforks(data, philo);
 		usleep(1000 * data->rules->timeeat);
-		if (unlockingforks(data, philo) == 0)
-			return (0);
+		unlockingforks(data, philo);
 		usleep(1000 * data->rules->timeslp);
 		printevent(data, philo, 't');
 	}
