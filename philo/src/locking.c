@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 01:04:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 22:31:05 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 22:41:27 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	unlockingforks(t_data *data, t_philo *philo)
 	if (philo->num % 2 == 1)
 	{
 		pthread_mutex_unlock(&philo->next_f->mfork);
-		pthread_mutex_unlock(&philo->prev_f->mfork);
+		if (data->table->members > 1)
+			pthread_mutex_unlock(&philo->prev_f->mfork);
 	}
 	else
 	{
