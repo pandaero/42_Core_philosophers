@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/19 16:32:47 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 17:14:31 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	*philosopher(void *arg)
 		unlockingforks(data, philo);
 		mswait(data->rules->timeslp);
 		printevent(data, philo, 't');
+		usleep(100);
 	}
 	return (0);
 }
