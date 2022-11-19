@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 19:01:40 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 01:08:36 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 21:46:02 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,16 @@ static void	settingrules(t_set *rules, int argc, char **argv)
 		rules->reqeat = ft_atoi(argv[5]);
 }
 
-//*Program runs the philosopher exercise.
+//Program runs the philosopher exercise.
 int	main(int argc, char **argv)
 {
 	t_set	*rules;
 	int		i;
 
 	rules = 0;
-	rules = (t_set *)malloc(sizeof(t_set));
 	if (argc == 5 || argc == 6)
 	{
+		rules = (t_set *)malloc(sizeof(t_set));
 		i = 1;
 		while (i < argc)
 		{
