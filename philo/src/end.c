@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 23:50:48 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 00:47:25 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:04:45 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	freetable(t_table *table)
 //Function frees memory used by a data type.
 void	freedata(t_data *data)
 {
+	pthread_mutex_destroy(&data->mxeaten);
+	pthread_mutex_destroy(&data->mxtime);
 	free(data->tmst);
 	free(data->rules);
 	free(data);

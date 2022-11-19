@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 21:12:50 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:03:03 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,15 @@ typedef struct s_set
 //Typedef stores data required by a philosopher thread to work.
 typedef struct s_data
 {
-	int			philonum;
-	int			starved;
-	int			eaten;
-	int			actions;
-	t_set		*rules;
-	t_table		*table;
-	t_timestamp	*tmst;
+	int				philonum;
+	int				starved;
+	int				eaten;
+	int				actions;
+	t_set			*rules;
+	t_table			*table;
+	t_timestamp		*tmst;
+	pthread_mutex_t	mxtime;
+	pthread_mutex_t	mxeaten;
 }				t_data;
 
 // MEMORY HANDLING
