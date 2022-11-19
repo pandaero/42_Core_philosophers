@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/19 16:03:03 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:30:29 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ long	ft_atol(char *str);
 // OTHER UTILS
 //Function returns a random (up to) 5-digit number based on the current time.
 int		randomnum(int max);
+//Function will wait for the input in ms.
+void	mswait(long wait);
 
 // MAIN
 //Function represents a thread that checks for philosophers starving.
