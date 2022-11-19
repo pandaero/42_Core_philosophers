@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 23:42:50 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/19 16:01:36 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:20:38 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,25 +43,16 @@ void	feeding(t_data *data, t_philo *philo)
 }
 
 //Function prints out an event.
-void	printevent(t_data *data, t_philo *philo, char ch)
+void	printevent(t_data *data, t_philo *philo, char ch, char *str)
 {
 	if (ch == 'd')
 	{
-		printf("%5ld %d died\n", data->tmst->absms, philo->num);
+		printf("%5ld %d %s\n", data->tmst->absms, philo->num, str);
 		return ;
 	}
 	if (data->starved == 0 && data->eaten < data->table->members)
 	{
 		workoutts(data);
-		if (ch == 'p')
-			printf("%5ld %d has taken a fork\n", data->tmst->absms, philo->num);
-		if (ch == 'f')
-			printf("%5ld %d has taken a fork\n", data->tmst->absms, philo->num);
-		if (ch == 'e')
-			printf("%5ld %d is eating\n", data->tmst->absms, philo->num);
-		if (ch == 's')
-			printf("%5ld %d is sleeping\n", data->tmst->absms, philo->num);
-		if (ch == 't')
-			printf("%5ld %d is thinking\n", data->tmst->absms, philo->num);
+		printf("%5ld %d %s\n", data->tmst->absms, philo->num, str);
 	}
 }

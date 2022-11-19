@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 18:57:39 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/19 16:30:29 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:16:20 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	feeding(t_data *data, t_philo *philo);
 //Function works out the standard timestamp.
 void	workoutts(t_data *data);
 //Function prints out an event.
-void	printevent(t_data *data, t_philo *philo, char ch);
+void	printevent(t_data *data, t_philo *philo, char ch, char *str);
 
 // SEARCHING
 //Function finds a philosopher based on the assigned number.

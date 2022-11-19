@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 01:04:24 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/17 22:41:27 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:17:50 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 static void	lockingforks_odd(t_data *data, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->next_f->mfork);
-	printevent(data, philo, 'f');
+	printevent(data, philo, 'f', "has taken a fork");
 	if (philo->prev_f)
 	{
 		pthread_mutex_lock(&philo->prev_f->mfork);
-		printevent(data, philo, 'p');
-		printevent(data, philo, 'e');
+		printevent(data, philo, 'p', "has taken a fork");
+		printevent(data, philo, 'e', "is eating");
 		feeding(data, philo);
 	}
 	else
@@ -40,12 +40,12 @@ void	lockingforks(t_data *data, t_philo *philo)
 	else
 	{
 		pthread_mutex_lock(&philo->prev_f->mfork);
-		printevent(data, philo, 'p');
+		printevent(data, philo, 'p', "has taken a fork");
 		if (philo->next_f)
 		{
 			pthread_mutex_lock(&philo->next_f->mfork);
-			printevent(data, philo, 'f');
-			printevent(data, philo, 'e');
+			printevent(data, philo, 'f', "has taken a fork");
+			printevent(data, philo, 'e', "is eating");
 			feeding(data, philo);
 		}
 	}
@@ -65,5 +65,5 @@ void	unlockingforks(t_data *data, t_philo *philo)
 		pthread_mutex_unlock(&philo->prev_f->mfork);
 		pthread_mutex_unlock(&philo->next_f->mfork);
 	}
-	printevent(data, philo, 's');
+	printevent(data, philo, 's', "is sleeping");
 }

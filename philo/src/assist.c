@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:39:47 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/19 17:14:31 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/19 18:19:23 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	*medical_examiner(void *arg)
 			{
 				unlockforks(data, philo);
 				data->starved++;
-				printevent(data, philo, 'd');
+				printevent(data, philo, 'd', "died");
 				break ;
 			}
 			if (data->table->members > 1)
@@ -94,7 +94,7 @@ void	*philosopher(void *arg)
 		mswait(data->rules->timeeat);
 		unlockingforks(data, philo);
 		mswait(data->rules->timeslp);
-		printevent(data, philo, 't');
+		printevent(data, philo, 't', "is thinking");
 		usleep(100);
 	}
 	return (0);
