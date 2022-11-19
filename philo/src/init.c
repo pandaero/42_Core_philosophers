@@ -6,7 +6,7 @@
 /*   By: pandalaf <pandalaf@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 00:47:31 by pandalaf          #+#    #+#             */
-/*   Updated: 2022/11/15 00:51:06 by pandalaf         ###   ########.fr       */
+/*   Updated: 2022/11/17 21:12:07 by pandalaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 t_fork	*initfork(t_fork *fork)
 {
 	fork = (t_fork *)malloc(sizeof(t_fork));
-	fork->available = 1;
 	pthread_mutex_init(&fork->mfork, 0);
 	return (fork);
 }
